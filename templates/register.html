@@ -1,120 +1,217 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
     <title>Register Donor</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='register.css') }}">
 
 </head>
-<body>
-     <div class="left-side">
-  <div class="overlay">
-    <span class="badge">DONOR REGISTRATION PORTAL</span>
-    <h1>Save Lives.<br>Donate Blood.</h1>
-    <p>
-      Join thousands of donors helping patients in emergency situations.
-      Your one donation can save up to three lives.
-    </p>
 
-    <div class="features">
-      <span>✔ Emergency Requests</span>
-      <span>✔ Verified Donors</span>
-      <span>✔ Secure Platform</span>
+<body>
+
+
+<!-- ================= LEFT SIDE ================= -->
+
+<div class="left-side">
+
+    <div class="overlay">
+
+        <span class="badge">
+            DONOR REGISTRATION PORTAL
+        </span>
+
+        <h1>
+            Save Lives.<br>
+            Donate Blood.
+        </h1>
+
+        <p>
+            Join thousands of donors helping patients
+            in emergency situations.
+
+            Your one donation can save up to three lives.
+        </p>
+
+
+        <div class="features">
+
+            <span>✔ Emergency Requests</span>
+
+            <span>✔ Verified Donors</span>
+
+            <span>✔ Secure Platform</span>
+
+        </div>
+
     </div>
-  </div>
+
 </div>
 
-    <div class="right-side">
-        <div class="container">
-            <h2>Create Donor Account</h2>
-<p class="subtitle">Register to start saving lives</p>         
-            <form id="registerForm">
-                 
-        <input type="text" id="name" placeholder="Full Name" required>
-        <div class="row">
-        <input type="number" id="age" placeholder="Age" required>
-        <select id="gender" required>
-    <option value="">Select Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    <option>Other</option>
-</select>
-        </div>
-        <select id="bloodGroup" required>
-            <option value="">Select Blood Group</option>
-            <option>A+</option>
-            <option>A-</option>
-            <option>B+</option>
-            <option>B-</option>
-            <option>O+</option>
-            <option>O-</option>
-            <option>AB+</option>
-            <option>AB-</option>
-        </select>
 
-        <input type="text" id="contact" placeholder="Contact Number" required>
 
-        <input type="email" id="email" placeholder="Email Address" required>
+<!-- ================= RIGHT SIDE ================= -->
 
-        <select id="state" required>
-            <option value="">Select State</option>
-        </select>
+<div class="right-side">
 
-        <select id="city" required>
-            <option value="">Select City</option>
-        </select>
+    <div class="container">
 
-        <button type="submit">Save a Life</button>
+        <h2>Create Donor Account</h2>
+
+        <p class="subtitle">
+            Register to start saving lives
+        </p>
+
+
+
+        <!-- ================= FORM ================= -->
+
+        <form id="registerForm">
+
+
+            <!-- NAME -->
+
+            <input type="text"
+                   id="name"
+                   placeholder="Full Name"
+                   required>
+
+
+
+            <!-- AGE + GENDER -->
+
+            <div class="row">
+
+                <input type="number"
+                       id="age"
+                       placeholder="Age"
+                       min="18"
+                       max="65"
+                       required>
+
+
+                <select id="gender" required>
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- BLOOD GROUP -->
+
+            <select id="bloodGroup" required>
+
+                <option value="">
+                    Select Blood Group
+                </option>
+
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+
+            </select>
+
+
+
+            <!-- CONTACT -->
+
+            <input type="tel"
+                   id="contact"
+                   placeholder="Contact Number"
+                   pattern="[0-9]{10}"
+                   maxlength="10"
+                   required>
+
+
+
+            <!-- EMAIL -->
+
+            <input type="email"
+                   id="email"
+                   placeholder="Email Address"
+                   required>
+
+
+
+            <!-- STATE -->
+
+            <select id="state" required>
+
+                <option value="">
+                    Select State
+                </option>
+
+            </select>
+
+
+
+            <!-- CITY -->
+
+            <select id="city" required>
+
+                <option value="">
+                    Select City
+                </option>
+
+            </select>
+
+
+
+            <!-- SUBMIT BUTTON -->
+
+            <button type="submit">
+
+                Save a Life
+
+            </button>
+
+        </form>
+
+
+
+        <!-- SUCCESS / ERROR MESSAGE -->
+
         <p id="message"></p>
-            </form>
-            <p id="message"></p>
-        </div>
+
     </div>
 
-<!--<div class="container">
-    <h2>Blood Donor Registration</h2>
+</div>
 
-    <form id="registerForm">
 
-        <input type="text" id="name" placeholder="Full Name" required>
 
-        <input type="number" id="age" placeholder="Age" required>
-        <select id="gender" required>
-    <option value="">Select Gender</option>
-    <option>Male</option>
-    <option>Female</option>
-    <option>Other</option>
-</select>
-
-        <select id="bloodGroup" required>
-            <option value="">Select Blood Group</option>
-            <option>A+</option>
-            <option>A-</option>
-            <option>B+</option>
-            <option>B-</option>
-            <option>O+</option>
-            <option>O-</option>
-            <option>AB+</option>
-            <option>AB-</option>
-        </select>
-
-        <input type="text" id="contact" placeholder="Contact Number" required>
-
-        <input type="email" id="email" placeholder="Email Address" required>
-
-        <select id="state" required>
-            <option value="">Select State</option>
-        </select>
-
-        <select id="city" required>
-            <option value="">Select City</option>
-        </select>
-
-        <button type="submit">Register Donor</button>
-
-    </form>
-
-    <p id="message"></p>
-</div>-->
+<!-- ================= JAVASCRIPT ================= -->
 
 <script src="{{ url_for('static', filename='register.js') }}"></script>
 
