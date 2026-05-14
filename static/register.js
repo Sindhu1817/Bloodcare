@@ -1,218 +1,110 @@
 const stateDropdown = document.getElementById("state");
 const cityDropdown = document.getElementById("city");
 
-
-// ======================================
-// LOAD STATES
-// ======================================
+// ===============================
+// LOAD ALL INDIAN STATES
+// ===============================
 
 fetch("https://countriesnow.space/api/v0.1/countries/states", {
-
     method: "POST",
-
-    headers: {
-        "Content-Type": "application/json"
-    },
-
-    body: JSON.stringify({
-        country: "India"
-    })
-
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ country: "India" })
 })
-
-.then(response => response.json())
-
+.then(res => res.json())
 .then(data => {
-
-    if (!data.data || !data.data.states) {
-        console.log("States not found");
-        return;
-    }
-
     data.data.states.forEach(state => {
-
         const option = document.createElement("option");
-
         option.value = state.name;
         option.textContent = state.name;
-
         stateDropdown.appendChild(option);
-
     });
-
 })
-
-.catch(error => {
-    console.log("State Load Error:", error);
-});
+.catch(error => console.log("State Load Error:", error));
 
 
-
-
-// ======================================
-// LOAD CITIES
-// ======================================
+// ===============================
+// LOAD CITIES BASED ON STATE
+// ===============================
 
 stateDropdown.addEventListener("change", function () {
 
-    cityDropdown.innerHTML =
-        '<option value="">Select City</option>';
-
-    if (!this.value) return;
+    cityDropdown.innerHTML = '<option value="">Select City</option>';
 
     fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
-
         method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
             country: "India",
             state: this.value
         })
-
     })
-
-    .then(response => response.json())
-
+    .then(res => res.json())
     .then(data => {
-
-        if (!data.data) {
-            console.log("Cities not found");
-            return;
-        }
-
         data.data.forEach(city => {
-
             const option = document.createElement("option");
-
             option.value = city;
             option.textContent = city;
-
             cityDropdown.appendChild(option);
-
         });
-
     })
-
-    .catch(error => {
-        console.log("City Load Error:", error);
-    });
-
+    .catch(error => console.log("City Load Error:", error));
 });
 
 
-
-
-// ======================================
+// ===============================
 // REGISTER DONOR
-// ======================================
+// ===============================
 
-document.getElementById("registerForm")
-.addEventListener("submit", function (e) {
+document.getElementById("registerForm").addEventListener("submit", function (e) {
 
-    e.preventDefault();
+    e.preventDefault();   // prevent page reload
 
     const donorData = {
-
-        name:
-            document.getElementById("name").value,
-
-        age:
-            document.getElementById("age").value,
-
-        gender:
-            document.getElementById("gender").value,
-
-        blood_group:
-            document.getElementById("bloodGroup").value,
-
-        contact:
-            document.getElementById("contact").value,
-
-        email:
-            document.getElementById("email").value,
-
-        state:
-            document.getElementById("state").value,
-
-        city:
-            document.getElementById("city").value
-
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value,
+        blood_group: document.getElementById("bloodGroup").value,
+        contact: document.getElementById("contact").value,
+        email: document.getElementById("email").value,
+        state: document.getElementById("state").value,
+        city: document.getElementById("city").value
     };
 
-
     fetch("/register_donor", {
-
         method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(donorData)
-
     })
-
     .then(response => response.json())
-
     .then(data => {
 
         console.log("Server Response:", data);
 
-        const message =
-            document.getElementById("message");
+        const message = document.getElementById("message");
 
-
-        message.innerText =
-            data.message || "❤️ Registered Successfully!";
-
+        // Always show success message
+        message.innerText = data.message || "❤️ Registered Successfully!";
         message.style.color = "limegreen";
-
         message.style.fontWeight = "600";
 
-
-        // Animation
-
+        // Heartbeat animation
         message.animate([
-
             { transform: "scale(1)" },
-
-            { transform: "scale(1.1)" },
-
+            { transform: "scale(1.2)" },
             { transform: "scale(1)" }
-
         ], {
-
-            duration: 500,
+            duration: 600,
             iterations: 2
-
         });
 
-
-        // Reset form
-
         document.getElementById("registerForm").reset();
-
-        cityDropdown.innerHTML =
-            '<option value="">Select City</option>';
-
+        cityDropdown.innerHTML = '<option value="">Select City</option>';
     })
-
     .catch(error => {
+        console.error("Registration Error:", error);
 
-        console.log("Registration Error:", error);
-
-        const message =
-            document.getElementById("message");
-
-        message.innerText =
-            "❌ Something went wrong. Try again.";
-
+        const message = document.getElementById("message");
+        message.innerText = "❌ Something went wrong. Try again.";
         message.style.color = "red";
-
     });
-
 });
