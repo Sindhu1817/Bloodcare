@@ -1,580 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="google-site-verification"
-        content="2oae0y7kqsA-jD-85zM240wND_136xnaY1M-rvOvwIE" />
-
+<meta name="google-site-verification" content="2oae0y7kqsA-jD-85zM240wND_136xnaY1M-rvOvwIE" />
   <title>BloodCare | Professional Blood Bank System</title>
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <meta name="description"
-        content="Professional blood donation and management system">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Professional blood donation and management system">
 
   <!-- Google Fonts -->
-
-  <link rel="preconnect"
-        href="https://fonts.googleapis.com">
-
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap"
-        rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
-
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Main CSS -->
-
-  <link rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}">
-
+    
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 
 <body>
 
 <div id="mainApp">
 
-  <!-- ================= NAVBAR ================= -->
-
+  <!-- ================= NAVIGATION ================= -->
   <nav class="navbar">
-
     <div class="nav-container">
 
-      <!-- LOGO -->
-
       <div class="nav-brand">
-
         <i class="fas fa-heartbeat"></i>
-
         <div>
-
           <h1>BloodCare</h1>
-
-          <p class="nav-subtitle">
-            Blood Bank Management System
-          </p>
-
+          <p class="nav-subtitle">Blood Bank Management System</p>
         </div>
-
       </div>
-
-
-      <!-- MENU -->
 
       <div class="nav-menu">
-
-        <a href="/"
-           class="nav-link active">
-
+        <a href="/" class="nav-link active">
           <i class="fas fa-home"></i>
-
           <span>Dashboard</span>
-
         </a>
 
-
-        <a href="/register"
-           class="nav-link">
-
+        <a href="/register" class="nav-link">
           <i class="fas fa-hand-holding-heart"></i>
-
           <span>Donate Blood</span>
-
         </a>
 
-
-        <a href="/donors-page"
-           class="nav-link">
-
+        <a href="/donors-page" class="nav-link">
           <i class="fas fa-search"></i>
-
           <span>Find Donors</span>
-
         </a>
 
+        
 
-        <a href="/about"
-           class="nav-link">
-
-          <i class="fas fa-info-circle"></i>
-
-          <span>About</span>
-
-        </a>
-
-      </div>
-
-    </div>
-
+     <a href="{{ url_for('about') }}" class="nav-link">
+  <i class="fas fa-info-circle"></i>
+  <span>About</span>
+</a>
   </nav>
 
-
-
   <!-- ================= MAIN CONTENT ================= -->
-
   <main class="main-content">
 
-    <section id="dashboard"
-             class="page-section active">
-
-
-      <!-- SECTION HEADER -->
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="page-section active">
 
       <div class="section-header">
-
         <div>
-
           <h2>Dashboard Overview</h2>
-
           <p class="section-subtitle">
             Welcome back. Here's what's happening today.
           </p>
-
         </div>
-
       </div>
 
-
-
-      <!-- ================= STATS CARDS ================= -->
-
+      <!-- ========== STATS CARDS ========== -->
       <div class="stats-grid">
 
-
-        <!-- DONORS -->
-
         <div class="stat-card">
-
-          <div class="stat-icon"
-               style="background:#e3f2fd;">
-
-            <i class="fas fa-users"
-               style="color:#1976d2;"></i>
-
+          <div class="stat-icon" style="background: #e3f2fd;">
+            <i class="fas fa-users" style="color: #1976d2;"></i>
           </div>
-
           <div class="stat-content">
-
             <h3>1,247</h3>
-
             <p>Active Donors</p>
-
             <span class="stat-change positive">
-
-              <i class="fas fa-arrow-up"></i>
-
-              12% this month
-
+              <i class="fas fa-arrow-up"></i> 12% this month
             </span>
-
           </div>
-
         </div>
 
-
-        <!-- BLOOD STOCK -->
-
         <div class="stat-card">
-
-          <div class="stat-icon"
-               style="background:#ffebee;">
-
-            <i class="fas fa-tint"
-               style="color:#d32f2f;"></i>
-
+          <div class="stat-icon" style="background: #ffebee;">
+            <i class="fas fa-tint" style="color: #d32f2f;"></i>
           </div>
-
           <div class="stat-content">
-
             <h3>342</h3>
-
             <p>Units Available</p>
-
             <span class="stat-change neutral">
               Updated 2 hours ago
             </span>
-
           </div>
-
         </div>
 
-
-        <!-- HOSPITALS -->
-
         <div class="stat-card">
-
-          <div class="stat-icon"
-               style="background:#e8f5e9;">
-
-            <i class="fas fa-hospital"
-               style="color:#388e3c;"></i>
-
+          <div class="stat-icon" style="background: #e8f5e9;">
+            <i class="fas fa-hospital" style="color: #388e3c;"></i>
           </div>
-
           <div class="stat-content">
-
             <h3>28</h3>
-
             <p>Hospitals</p>
-
             <span class="stat-change positive">
-
-              <i class="fas fa-plus"></i>
-
-              2 new
-
+              <i class="fas fa-plus"></i> 2 new
             </span>
-
           </div>
-
         </div>
 
-
-        <!-- REQUESTS -->
-
         <div class="stat-card">
-
-          <div class="stat-icon"
-               style="background:#fff3e0;">
-
-            <i class="fas fa-clock"
-               style="color:#f57c00;"></i>
-
+          <div class="stat-icon" style="background: #fff3e0;">
+            <i class="fas fa-clock" style="color: #f57c00;"></i>
           </div>
-
           <div class="stat-content">
-
             <h3>12</h3>
-
             <p>Pending Requests</p>
-
             <span class="stat-change negative">
-
-              <i class="fas fa-exclamation-circle"></i>
-
-              3 urgent
-
+              <i class="fas fa-exclamation-circle"></i> 3 urgent
             </span>
-
           </div>
-
         </div>
 
       </div>
 
-
-
-      <!-- ================= BLOOD STOCK ================= -->
-
+      <!-- ========== BLOOD STOCK STATUS ========== -->
       <div class="content-card">
-
         <div class="card-header">
-
           <h3>Blood Stock Status</h3>
-
-          <p class="card-subtitle">
-            Current inventory levels by blood type
-          </p>
-
+          <p class="card-subtitle">Current inventory levels by blood type</p>
         </div>
-
 
         <div class="blood-stock-grid">
 
-
-          <!-- A+ -->
-
           <div class="blood-type-card">
-
             <div class="blood-type-header">
-
               <span class="blood-type-label">A+</span>
-
               <span class="blood-type-percent">78%</span>
-
             </div>
-
             <div class="progress-bar">
-
-              <div class="progress-fill"
-                   style="width:78%; background:#d32f2f;">
-              </div>
-
+              <div class="progress-fill" style="width: 78%; background: #d32f2f;"></div>
             </div>
-
             <div class="blood-type-info">
-
               <p><strong>24 units</strong> available</p>
-
-              <p class="text-muted">
-                Last donation: 2 hours ago
-              </p>
-
+              <p class="text-muted">Last donation: 2 hours ago</p>
             </div>
-
           </div>
 
-
-
-          <!-- O+ -->
-
           <div class="blood-type-card">
-
             <div class="blood-type-header">
-
               <span class="blood-type-label">O+</span>
-
               <span class="blood-type-percent">45%</span>
-
             </div>
-
             <div class="progress-bar">
-
-              <div class="progress-fill"
-                   style="width:45%; background:#1976d2;">
-              </div>
-
+              <div class="progress-fill" style="width: 45%; background: #1976d2;"></div>
             </div>
-
             <div class="blood-type-info">
-
               <p><strong>14 units</strong> available</p>
-
-              <p class="text-danger">
-                Critical level
-              </p>
-
+              <p class="text-danger">Critical level</p>
             </div>
-
           </div>
 
         </div>
-
       </div>
 
-
-
-      <!-- ================= RECENT DONATIONS ================= -->
-
+      <!-- ========== RECENT DONATIONS TABLE ========== -->
       <div class="content-card">
-
         <div class="card-header">
-
           <h3>Recent Donations</h3>
-
         </div>
 
-
         <div class="table-container">
-
           <table class="data-table">
-
             <thead>
-
               <tr>
-
                 <th>Donor</th>
                 <th>Blood Type</th>
                 <th>Date</th>
                 <th>Status</th>
-
               </tr>
-
             </thead>
-
-
             <tbody>
-
               <tr>
-
                 <td>Robert Johnson</td>
-
-                <td>
-                  <span class="badge badge-blood">
-                    O+
-                  </span>
-                </td>
-
+                <td><span class="badge badge-blood">O+</span></td>
                 <td>Mar 15, 2024</td>
-
-                <td>
-                  <span class="status-badge status-success">
-                    Completed
-                  </span>
-                </td>
-
+                <td><span class="status-badge status-success">Completed</span></td>
               </tr>
 
-
               <tr>
-
                 <td>Maria Garcia</td>
-
-                <td>
-                  <span class="badge badge-blood">
-                    A+
-                  </span>
-                </td>
-
+                <td><span class="badge badge-blood">A+</span></td>
                 <td>Mar 14, 2024</td>
-
-                <td>
-                  <span class="status-badge status-success">
-                    Completed
-                  </span>
-                </td>
-
+                <td><span class="status-badge status-success">Completed</span></td>
               </tr>
-
 
               <tr>
-
                 <td>James Wilson</td>
-
-                <td>
-                  <span class="badge badge-blood">
-                    B-
-                  </span>
-                </td>
-
+                <td><span class="badge badge-blood">B-</span></td>
                 <td>Mar 14, 2024</td>
-
-                <td>
-                  <span class="status-badge status-warning">
-                    Processing
-                  </span>
-                </td>
-
+                <td><span class="status-badge status-warning">Processing</span></td>
               </tr>
-
             </tbody>
-
           </table>
-
         </div>
-
       </div>
-
-
-
       <!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="footer-container">
 
-      <footer class="footer">
+    <div class="footer-left">
+      <h3><i class="fas fa-heartbeat"></i> BloodCare</h3>
+      <p>Professional Blood Bank Management System</p>
+      <p class="footer-small">
+        Saving lives through efficient blood donation management.
+      </p>
+    </div>
 
-        <div class="footer-container">
+    <div class="footer-center">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Dashboard</a></li>
+        <li><a href="/register">Donate Blood</a></li>
+        <li><a href="/donors-page">Find Donors</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </div>
 
+    <div class="footer-right">
+      <h4>Contact</h4>
+      <p><i class="fas fa-envelope"></i> support@bloodcare.com</p>
+      <p><i class="fas fa-phone"></i> +91 6305691447</p>
+      <p><i class="fas fa-map-marker-alt"></i> India</p>
+    </div>
 
-          <!-- LEFT -->
+  </div>
 
-          <div class="footer-left">
-
-            <h3>
-
-              <i class="fas fa-heartbeat"></i>
-
-              BloodCare
-
-            </h3>
-
-            <p>
-              Professional Blood Bank Management System
-            </p>
-
-            <p class="footer-small">
-              Saving lives through efficient blood donation management.
-            </p>
-
-          </div>
-
-
-
-          <!-- CENTER -->
-
-          <div class="footer-center">
-
-            <h4>Quick Links</h4>
-
-            <ul>
-
-              <li>
-                <a href="/">Dashboard</a>
-              </li>
-
-              <li>
-                <a href="/register">Donate Blood</a>
-              </li>
-
-              <li>
-                <a href="/donors-page">Find Donors</a>
-              </li>
-
-              <li>
-                <a href="/about">About</a>
-              </li>
-
-            </ul>
-
-          </div>
-
-
-
-          <!-- RIGHT -->
-
-          <div class="footer-right">
-
-            <h4>Contact</h4>
-
-            <p>
-
-              <i class="fas fa-envelope"></i>
-
-              support@bloodcare.com
-
-            </p>
-
-            <p>
-
-              <i class="fas fa-phone"></i>
-
-              +91 6305691447
-
-            </p>
-
-            <p>
-
-              <i class="fas fa-map-marker-alt"></i>
-
-              India
-
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <!-- FOOTER BOTTOM -->
-
-        <div class="footer-bottom">
-
-          © <span id="year"></span>
-
-          BloodCare | All Rights Reserved
-
-        </div>
-
-      </footer>
+  <div class="footer-bottom">
+    © <span id="year"></span> BloodCare | All Rights Reserved
+  </div>
+</footer>
 
     </section>
 
@@ -583,6 +256,5 @@
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
-
 </body>
 </html>
