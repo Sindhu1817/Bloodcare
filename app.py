@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 import mysql.connector
 import traceback
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -16,10 +17,17 @@ app.secret_key = "supersecretkey"
 def get_db():
 
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="YOUR_PASSWORD",
-        database="blood_bank"
+
+        host=os.environ.get("MYSQLHOST"),
+
+        user=os.environ.get("MYSQLUSER"),
+
+        password=os.environ.get("MYSQLPASSWORD"),
+
+        database=os.environ.get("MYSQLDATABASE"),
+
+        port=int(os.environ.get("MYSQLPORT", 3306))
+
     )
 
     return conn
@@ -68,9 +76,15 @@ def init_db():
     db.close()
 
 
-# Initialize DB
+# ===============================
+# INITIALIZE DATABASE
+# ===============================
 
 try:
+
+    print("MYSQLHOST:", os.environ.get("MYSQLHOST"))
+    print("MYSQLUSER:", os.environ.get("MYSQLUSER"))
+    print("MYSQLDATABASE:", os.environ.get("MYSQLDATABASE"))
 
     init_db()
 
@@ -78,7 +92,8 @@ try:
 
 except Exception as e:
 
-    print("❌ Database init error:", e)
+    print("❌ Database init error:")
+    traceback.print_exc()
 
 
 # ===============================
@@ -97,9 +112,6 @@ def register():
 
 @app.route("/donors-page")
 def donors():
-
-    # FIXED FILE NAME
-
     return render_template("donor.html")
 
 
@@ -131,8 +143,11 @@ def register_donor():
         # ===============================
 
         cursor.execute(
+
             "SELECT * FROM donors WHERE email=%s",
+
             (data["email"],)
+
         )
 
         if cursor.fetchone():
@@ -147,8 +162,11 @@ def register_donor():
         # ===============================
 
         cursor.execute(
+
             "SELECT * FROM donors WHERE contact=%s",
+
             (data["contact"],)
+
         )
 
         if cursor.fetchone():
@@ -164,8 +182,8 @@ def register_donor():
 
         query = """
 
-            INSERT INTO donors
-            (
+            INSERT INTO donors (
+
                 name,
                 age,
                 gender,
@@ -175,11 +193,13 @@ def register_donor():
                 country,
                 state,
                 city
+
             )
 
             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
 
         """
+
 
         values = (
 
@@ -195,9 +215,11 @@ def register_donor():
 
         )
 
+
         cursor.execute(query, values)
 
         db.commit()
+
 
         return jsonify({
             "message": "❤️ You are now someone's hero!"
@@ -254,6 +276,7 @@ def search_donors():
         query = """
 
             SELECT
+
                 id,
                 name,
                 age,
@@ -274,6 +297,7 @@ def search_donors():
 
         """
 
+
         cursor.execute(
 
             query,
@@ -285,6 +309,7 @@ def search_donors():
             )
 
         )
+
 
         donors = cursor.fetchall()
 
@@ -310,8 +335,10 @@ def search_donors():
 
 if __name__ == "__main__":
 
+    port = int(os.environ.get("PORT", 5000))
+
     app.run(
         host="0.0.0.0",
-        port=5000,
-        debug=True
+        port=port,
+        debug=False
     )
